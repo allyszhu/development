@@ -1,14 +1,13 @@
-import logo from './logo.jpg';
 import React, { Component } from "react";
 import './App.css';
 import Navbar from './components/navbar';
 import DisplayList from "./components/DisplayList"
 
-var url = "http://jsonplaceholder.typicode.com/users";
-var url2 = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-var url3 = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=m";
-var url4 = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 
+var url3 = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=m";
+
+/* This is the main App class. It handles all data storage and all functions, which are passed to respective components.
+*/
 class App extends Component {
 
   state = {
@@ -45,7 +44,7 @@ class App extends Component {
       .catch(console.log)
   }
 
-  // <Contacts contacts={this.state.contacts} />
+  //handleAdd: function that handles adding drink to cart
   handleAdd = drink => {
     const drinkInOrder = {...drink};
     drinkInOrder.key = Date.now();
@@ -54,7 +53,7 @@ class App extends Component {
     const newTotal = +this.state.total + +drink.numberOfIngredients
     this.setState({total: newTotal})
   };
-
+  //handleDelete: function that handles removing drink to cart
   handleRemove = drink => {
     console.log(drink.key);
     const items = this.state.order.filter(drinkInOrder => drinkInOrder.key != drink.key);
@@ -62,18 +61,20 @@ class App extends Component {
     const newTotal = +this.state.total - +drink.numberOfIngredients
     this.setState({total: newTotal})
   }
-
+  //handleFilter: function that handles filtering drinks on display 
   handleFilter = (ingredient, liquor) => {
     const filtered = this.state.drinks.filter(drink => (drink.strIngredient1.includes(`${liquor}`) || drink.strIngredient2.includes(`${liquor}`)) && (drink.strIngredient1.includes(`${ingredient}`) || drink.strIngredient2.includes(`${ingredient}`)));
     this.setState({ filteredItems: filtered })
   }
+  //changeLiquorState: function that changes liquor state for filter
   changeIngredientState = state => {
     this.setState({ ingredient: state })
   }
+  //changeIngredientState: function that changes ingredient state for filter
   changeLiquorState = state => {
     this.setState({ liquor: state })
   }
-
+  //handleSort: function that handles sorting by number of ingredients
   handleSort = order => {
     var sorted = this.state.filteredItems;
     if (order == "L") {
@@ -87,7 +88,7 @@ class App extends Component {
   }
 
 
-
+  //function that checks for number of ingredients called in the beginning when data is first mounted
   checkNumberIngredients = drink => {
     if (drink.strIngredient2 == null) {
       drink.numberOfIngredients = 1;
@@ -104,15 +105,6 @@ class App extends Component {
     }
   }
 
-  // handleFilter = liquor => {
-  //   const filtered = this.state.drinks.filter(drink => drink.strIngredient1.includes(`${liquor}`)|| drink.strIngredient2.includes(`${liquor}`));
-  //   this.setState({ filteredItems: filtered })
-  // }
-
-  reset = () => {
-    const filtered = this.state.drinks;
-    this.setState({ filteredItems: filtered })
-  }
 
   render() {
     return (
@@ -121,7 +113,6 @@ class App extends Component {
           handleAdd={this.handleAdd}
           handleDelete={this.handleRemove}
           handleFilter={this.handleFilter}
-          reset={this.reset}
           order={this.state.order}
           ingredient={this.state.ingredient}
           liquor={this.state.liquor}

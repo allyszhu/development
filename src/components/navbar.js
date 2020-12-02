@@ -3,15 +3,28 @@ import React from 'react'
 import { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 
+/* This is the component for the top navigation bar. It contains all filtering, sorting features, in addition to the shopping cart
+which contains drinks added. 
+Parameters: handleAdd: function that handles adding drink to cart
+            handleDelete: function that handles removing drink to cart
+            handleFilter: function that handles filtering drinks on display
+            order: list of drinks in cart
+            ingredient: the state of filter for ingredients (ie. 'lime'))
+            liquor: the state of filter for liquor (ie. 'rum')
+            changeLiquorState: function that changes liquor state for filter
+            changeIngredientState: function that changes ingredient state for filter
+            handleSort: function that handles sorting by number of ingredients 
+            total: total ingredient units in cart
+*/
 
 class Navbar extends Component {
+
     render() {
         const {
             handleAdd,
             handleDelete,
             handleFilter,
             order,
-            reset,
             ingredient,
             liquor,
             changeLiquorState,
@@ -24,12 +37,14 @@ class Navbar extends Component {
         return (
             <div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    {/*TITLE*/} 
                     <a class="navbar-brand" href="#">Skål and Bones</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
+                            {/*FILTER BY INGREDIENT*/} 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Ingredients</a>
@@ -40,6 +55,7 @@ class Navbar extends Component {
                                     <a class="dropdown-item" onClick={() => { ing = "yrup"; handleFilter(ing, liquor); changeIngredientState(ing) }}>Syrup</a>
                                 </div>
                             </li>
+                            {/*FILTER BY LIQUOR*/} 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Liquor</a>
@@ -51,6 +67,7 @@ class Navbar extends Component {
                                     <a class="dropdown-item" onClick={() => { liq = "ermouth"; handleFilter(ingredient, liq); changeLiquorState(liq) }}>Vermouth</a>
                                 </div>
                             </li>
+                        {/*SORT BY NUMBER OF INGREDIENTS*/}                           
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Sort by number of Ingredients</a>
@@ -60,13 +77,14 @@ class Navbar extends Component {
                                 </div>
                             </li>
                         </ul>
+                        {/*SHOPPING CART*/}
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Your Order</a>
                             <div class="dropdown-menu cart" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Your Cart</a>
                                 <a class="dropdown-item" href="#">Number of ingredient units: {total}</a>
-                                {/*THIS IS WHERE THE CART BEGINS*/}
+                                {/*THIS IS WHERE THE INTERACTIVE PART OF THE CART BEGINS*/}
                                 <div>
                                     <div class="filler"></div>
                                     <div class="card-deck"

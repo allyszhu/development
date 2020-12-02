@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 
-
+/* This is the component that handles displaying all drinks.  
+Parameters: handleAdd: function that handles adding drink to cart
+            filteredItems: this is the list of items that are filtered by the Navbar and should be displayed. 
+*/
 class DisplayList extends Component {
     render() {
         const {
@@ -20,20 +23,16 @@ class DisplayList extends Component {
             
                                 <img class="img-fluid" src={drink.strDrinkThumb}></img>
                                 <div class="card-body">
-                                    <h5 class="card-title">{drink.strDrink}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">{drink.strInstructions}</h6>
-                                    <small class="text-muted">number of ingredients: {drink.numberOfIngredients}</small>
+                                    <h5 class="card-title">{drink.strDrink}</h5> {/*drink name*/} 
+                                    <h6 class="card-subtitle mb-2 text-muted">{drink.strInstructions}</h6> {/*instructions for drink*/} 
+                                    <small class="text-muted">Number of Ingredients: {drink.numberOfIngredients}</small>{/*number of ingredients*/} 
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted">{drink.strIngredient1}, {drink.strIngredient2}, {drink.strIngredient3}, {drink.strIngredient4}</small>
+                                    <small class="text-muted">Ingredients: {drink.strIngredient1}, {drink.strIngredient2}, {drink.strIngredient3}, {drink.strIngredient4}</small>
                                     <div></div>
                                     <Button type="button"
                                         className="btn btn-light"
                                         onClick={() => handleAdd(drink)}>Add</Button>
-                                    <Button type="button"
-                                        className="btn btn-light"
-                                        onClick={() => handleDelete(drink)}>Remove</Button>
-            
                                 </div>
                             </div>
                         </div>
