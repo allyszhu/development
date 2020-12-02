@@ -13,15 +13,38 @@
   }
 }
 
+.card {
+  margin: 10px;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 1;
+}
+
+.cart {
+  overflow-y: scroll;
+  height:400px;
+  width: 600px;
+}
+.filler {
+  height: 100px;
+}
+
+
+.btn {
+  margin: 5px;
+  bottom: 20px;
+}
 .App-header {
-  background-color: #282c34;
+  background-color: whitesmoke;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
